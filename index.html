@@ -5712,21 +5712,21 @@ backdrop-filter:blur(8px);
 
 .welcomeBox{
 
-background:white;
+background:#fff;
 
-padding:50px;
+width:min(92%,520px);
 
-border-radius:35px;
+padding:30px;
 
-width:90%;
-
-max-width:700px;
+border-radius:24px;
 
 text-align:center;
 
-box-shadow:0 30px 80px rgba(0,0,0,.4);
+box-shadow:0 20px 60px rgba(0,0,0,.30);
 
-animation:popup .8s;
+animation:popup .7s;
+
+margin:20px;
 
 }
 
@@ -5752,49 +5752,55 @@ transform:scale(1);
 
 .welcomeIcon{
 
-font-size:70px;
+font-size:55px;
 
-margin-bottom:20px;
+margin-bottom:15px;
 
 }
 
 .welcomeBox h2{
 
-font-size:38px;
+font-size:clamp(24px,4vw,36px);
 
 color:#0b6c37;
 
-margin-bottom:20px;
+line-height:1.5;
+
+margin-bottom:15px;
 
 }
 
 .welcomeBox p{
 
-font-size:23px;
+font-size:clamp(16px,2.3vw,21px);
 
-line-height:2.2;
+line-height:2;
 
-margin-bottom:35px;
+margin-bottom:25px;
 
 }
 
 .welcomeBox button{
 
-padding:18px 45px;
+width:100%;
+
+max-width:320px;
+
+padding:16px;
+
+font-size:20px;
 
 border:none;
 
+border-radius:50px;
+
 background:#0b6c37;
 
-color:white;
-
-font-size:22px;
-
-border-radius:50px;
+color:#fff;
 
 cursor:pointer;
 
-transition:.4s;
+transition:.3s;
 
 }
 
@@ -5834,50 +5840,49 @@ background:linear-gradient(90deg,gold,#0b6c37);
 
 }
 
-@media(max-width:900px){
+@media (max-width:768px){
 
-.mainTitle{
+.welcomeBox{
 
-font-size:36px !important;
+width:95%;
 
-}
+padding:20px;
 
-.sectionTitle{
-
-font-size:32px !important;
+border-radius:18px;
 
 }
 
-.names{
+.welcomeIcon{
 
-font-size:24px !important;
-
-}
-
-.quran{
-
-font-size:19px !important;
+font-size:45px;
 
 }
 
+.welcomeBox h2{
 
-
-.mainImage{
-
-width:220px !important;
-
-height:220px !important;
+font-size:26px;
 
 }
 
-button{
+.welcomeBox p{
 
-font-size:18px !important;
+font-size:17px;
+
+line-height:1.9;
+
+}
+
+.welcomeBox button{
+
+width:100%;
+
+font-size:18px;
+
+padding:14px;
 
 }
 
 }
-
 </style>
 
 <script>
