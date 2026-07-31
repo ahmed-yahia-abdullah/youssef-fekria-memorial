@@ -1845,7 +1845,9 @@ list.innerHTML="";
 
 if(error){
 
-list.innerHTML="حدث خطأ";
+console.error(error);
+
+list.innerHTML=error.message;
 
 return;
 
@@ -1931,7 +1933,9 @@ comment:comment
 
 if(error){
 
-alert("حدث خطأ أثناء الإرسال");
+console.error(error);
+
+alert(error.message);
 
 return;
 
