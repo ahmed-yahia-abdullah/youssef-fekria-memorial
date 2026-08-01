@@ -1688,51 +1688,47 @@ const tasIds=[
 
 function loadTasbeeh(){
 
-totalTasbeeh=0;
+totalTasbeeh = 0;
 
 tasIds.forEach(function(id){
 
-let value=parseInt(
+let value = parseInt(localStorage.getItem(id) || 0);
 
-localStorage.getItem(id)||0
+document.getElementById(id).innerHTML = value;
 
-);
-
-document.getElementById(id).innerHTML=value;
-
-totalTasbeeh+=value;
+totalTasbeeh += value;
 
 });
 
-document.getElementById(
+document.getElementById("allTasbeeh").innerHTML = totalTasbeeh;
 
-"allTasbeeh"
+const stats = document.getElementById("tasbeehTotal");
 
-).innerHTML=totalTasbeeh;
+if(stats){
+    stats.innerHTML = totalTasbeeh;
+}
 
 }
 
 function tasbeeh(id){
 
-let value=parseInt(
-
-document.getElementById(id).innerHTML
-
-);
+let value = parseInt(document.getElementById(id).innerHTML);
 
 value++;
 
-document.getElementById(id).innerHTML=value;
+document.getElementById(id).innerHTML = value;
 
-localStorage.setItem(id,value);
+localStorage.setItem(id, value);
 
 totalTasbeeh++;
 
-document.getElementById(
+document.getElementById("allTasbeeh").innerHTML = totalTasbeeh;
 
-"allTasbeeh"
+const stats = document.getElementById("tasbeehTotal");
 
-).innerHTML=totalTasbeeh;
+if(stats){
+    stats.innerHTML = totalTasbeeh;
+}
 
 }
 
