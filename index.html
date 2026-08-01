@@ -673,7 +673,58 @@ padding:15px;
 /* ========================= */
 /* End CSS */
 /* ========================= */
+.themeBtn{
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:22px;
+    background:#0b6c37;
+    color:#fff;
+    transition:.3s;
+}
 
+.themeBtn:hover{
+    transform:scale(1.1);
+}
+body.dark{
+    background:#121212;
+    color:#fff;
+}
+
+body.dark .navbar{
+    background:#1f1f1f;
+}
+
+body.dark .hero,
+body.dark .card,
+body.dark .commentForm{
+    background:#222;
+    color:#fff;
+}
+
+body.dark input,
+body.dark textarea{
+    background:#333;
+    color:#fff;
+    border-color:#555;
+}
+
+body.dark .sectionTitle,
+body.dark .card h3,
+body.dark .logo{
+    color:#7ef5a3;
+}
+
+body.dark .sectionDesc,
+body.dark .card p{
+    color:#ddd;
+}
+
+body.dark footer{
+    background:#111;
+}
 </style>
 <body>
 
@@ -694,7 +745,9 @@ padding:15px;
 </span>
 
 </div>
-
+<button id="themeToggle" class="themeBtn">
+    🌙
+</button>
 <div class="navLinks">
 
 <a href="#home">
@@ -1612,346 +1665,7 @@ loadTasbeeh
 
 );
 
-</script>
-<!-- ====================================== -->
-<!--         سجل الدعاء للجميع             -->
-<!-- ====================================== -->
-
-<section class="section" id="comments">
-
-<div class="container">
-
-<h2 class="sectionTitle">
-
-💬 سجل الدعاء
-
-</h2>
-
-<p class="sectionDesc">
-
-اكتب دعاء للمرحوم
-
-<b>يوسف عيسى علي</b>
-
-وللمرحومة
-
-<b>فكرية جاد عبدالحفيظ</b>
-
-ونسأل الله أن يجعله في ميزان حسناتهما.
-
-</p>
-
-<div class="commentForm">
-
-<input
-type="text"
-id="userName"
-placeholder="اكتب اسمك">
-
-<textarea
-id="userComment"
-placeholder="اكتب الدعاء هنا..."></textarea>
-
-<button
-class="btn btnGreen"
-onclick="sendComment()">
-
-إرسال الدعاء
-
-</button>
-
-</div>
-
-<div id="loadingComments">
-
-جارى تحميل الأدعية...
-
-</div>
-
-<div id="commentsList">
-
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-.commentForm{
-
-background:#fff;
-
-padding:35px;
-
-border-radius:25px;
-
-box-shadow:0 15px 40px rgba(0,0,0,.10);
-
-margin-bottom:35px;
-
-}
-
-.commentForm input,
-
-.commentForm textarea{
-
-width:100%;
-
-padding:18px;
-
-margin-bottom:18px;
-
-border-radius:15px;
-
-border:2px solid #ddd;
-
-font-size:18px;
-
-outline:none;
-
-}
-
-.commentForm textarea{
-
-height:180px;
-
-resize:none;
-
-}
-
-.commentForm input:focus,
-
-.commentForm textarea:focus{
-
-border-color:#0b6c37;
-
-}
-
-.commentCard{
-
-background:white;
-
-padding:25px;
-
-border-radius:20px;
-
-margin-top:20px;
-
-box-shadow:0 12px 30px rgba(0,0,0,.10);
-
-border-right:6px solid gold;
-
-}
-
-.commentHeader{
-
-display:flex;
-
-justify-content:space-between;
-
-margin-bottom:15px;
-
-font-weight:bold;
-
-color:#0b6c37;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-}
-
-.commentBody{
-
-font-size:19px;
-
-line-height:2;
-
-}
-
-#loadingComments{
-
-text-align:center;
-
-margin:20px;
-
-font-size:18px;
-
-color:#666;
-
-}
-
-@media(max-width:768px){
-
-.commentForm{
-
-padding:20px;
-
-}
-
-.commentHeader{
-
-flex-direction:column;
-
-}
-
-.commentBody{
-
-font-size:17px;
-
-}
-
-}
-
-</style>
-
-
-<script>
-const SUPABASE_URL="https://lkhtymerwsnvpqigafhq.supabase.co";
-const SUPABASE_KEY="sb_publishable_SGWwHvQKym0tleDKKAzLug_IYNp1n8T";
-
-const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-// باقي الكود...
-async function loadComments(){
-
-const loading=
-
-document.getElementById("loadingComments");
-
-loading.style.display="block";
-
-const {data,error}=await supabase
-.from("comments")
-.select("*");
-
-console.log("DATA:",data);
-console.log("ERROR:",error);
-
-loading.style.display="none";
-
-const list=
-
-document.getElementById("commentsList");
-
-list.innerHTML="";
-
-if(error){
-
-console.error(error);
-
-list.innerHTML=error.message;
-
-return;
-
-}
-
-if(data.length==0){
-
-list.innerHTML="<p>لا توجد أدعية حتى الآن.</p>";
-
-return;
-
-}
-
-data.forEach(function(item){
-
-list.innerHTML+=`
-
-<div class="commentCard">
-
-<div class="commentHeader">
-
-<span>${item.name}</span>
-
-<span>
-
-${new Date(item.created_at).toLocaleString("ar-EG")}
-
-</span>
-
-</div>
-
-<div class="commentBody">
-
-${item.comment}
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-
-async function sendComment(){
-
-let name=
-
-document.getElementById("userName")
-
-.value.trim();
-
-let comment=
-
-document.getElementById("userComment")
-
-.value.trim();
-
-if(name==""||comment==""){
-
-alert("يرجى كتابة الاسم والدعاء");
-
-return;
-
-}
-
-const {data,error}=await supabase
-.from("comments")
-.insert([
-{
-name:name,
-comment:comment
-}
-])
-.select();
-
-console.log("INSERT DATA:",data);
-console.log("INSERT ERROR:",error);
-
-if(error){
-
-console.error(error);
-
-alert(error.message);
-
-return;
-
-}
-
-document.getElementById("userName").value="";
-
-document.getElementById("userComment").value="";
-
-loadComments();
-
-}
-
-window.addEventListener(
-
-"load",
-
-loadComments
-
-);
-
-</script>
+  </script>
 <!-- ====================================== -->
 <!--            إحصائيات الموقع             -->
 <!-- ====================================== -->
@@ -2238,8 +1952,27 @@ year.innerHTML=new Date().getFullYear();
 }
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+const themeBtn=document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme")=="dark"){
+    document.body.classList.add("dark");
+    themeBtn.innerHTML="☀️";
+}
+
+themeBtn.onclick=function(){
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        themeBtn.innerHTML="☀️";
+    }else{
+        localStorage.setItem("theme","light");
+        themeBtn.innerHTML="🌙";
+    }
+
+};
 </body>
 
 </html>
