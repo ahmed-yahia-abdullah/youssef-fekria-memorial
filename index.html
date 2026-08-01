@@ -1828,12 +1828,11 @@ document.getElementById("loadingComments");
 loading.style.display="block";
 
 const {data,error}=await supabase
-
 .from("comments")
+.select("*");
 
-.select("*")
-
-.order("created_at",{ascending:false});
+console.log("DATA:",data);
+console.log("ERROR:",error);
 
 loading.style.display="none";
 
@@ -1915,21 +1914,18 @@ return;
 
 }
 
-const {error}=await supabase
-
+const {data,error}=await supabase
 .from("comments")
-
 .insert([
-
 {
-
 name:name,
-
 comment:comment
-
 }
+])
+.select();
 
-]);
+console.log("INSERT DATA:",data);
+console.log("INSERT ERROR:",error);
 
 if(error){
 
