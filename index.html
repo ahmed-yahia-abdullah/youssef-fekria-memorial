@@ -1806,12 +1806,10 @@ font-size:17px;
 
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-
+<script>
 const SUPABASE_URL="https://lkhtymerwsnvpqigafhq.supabase.co";
-
 const SUPABASE_KEY="sb_publishable_SGWwHvQKym0tleDKKAzLug_IYNp1n8T";
 
 const supabase = window.supabase.createClient(
@@ -1819,6 +1817,7 @@ const supabase = window.supabase.createClient(
   SUPABASE_KEY
 );
 
+// باقي الكود...
 async function loadComments(){
 
 const loading=
