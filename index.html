@@ -1755,54 +1755,49 @@ loadTasbeeh
 <!--            إحصائيات الموقع             -->
 <!-- ====================================== -->
 
+<!-- ====================================== -->
+<!--            إحصائيات الموقع             -->
+<!-- ====================================== -->
+
 <section class="section" id="statistics">
 
 <div class="container">
 
 <h2 class="sectionTitle">
-
 📊 إحصائيات الموقع
-
 </h2>
 
 <p class="sectionDesc">
-
-نسأل الله أن يجعل كل عمل صالح هنا في ميزان حسنات
-
+نسأل الله أن يجعل كل عمل صالح في هذه الصفحة في ميزان حسنات
 <b>المرحوم يوسف عيسى علي</b>
-
 و
-
-<b>المرحومة فكرية جاد عبدالحفيظ</b>
-
+<b>المرحومة فكرية جاد عبدالحفيظ</b>.
 </p>
 
-
+<div class="cards">
 
 <div class="card">
-
 <i class="fa-solid fa-book-quran"></i>
-
-<h3>
-
-عدد السور
-
-</h3>
-
-<div
-
-style="font-size:55px;font-weight:bold;color:#0b6c37;">
-
+<h3>السور الموجودة</h3>
+<div id="surahCount" style="font-size:55px;font-weight:bold;color:#0b6c37;">
 3
-
+</div>
 </div>
 
+<div class="card">
+<i class="fa-solid fa-user-group"></i>
+<h3>عدد الزوار</h3>
+<div id="visitorCount" style="font-size:55px;font-weight:bold;color:#0b6c37;">
+0
+</div>
 </div>
 
-
-
-
-
+<div class="card">
+<i class="fa-solid fa-hands-praying"></i>
+<h3>إجمالي التسبيحات</h3>
+<div id="tasbeehTotal" style="font-size:55px;font-weight:bold;color:#0b6c37;">
+0
+</div>
 </div>
 
 </div>
@@ -2015,7 +2010,47 @@ themeBtn.onclick=function(){
 
 };
 </script>
+<script>
 
+// عدد الزوار (محلي)
+let visitors = localStorage.getItem("visitorCount");
+
+if(!visitors){
+    visitors = 1;
+}else{
+    visitors = parseInt(visitors) + 1;
+}
+
+localStorage.setItem("visitorCount", visitors);
+
+document.getElementById("visitorCount").innerHTML = visitors;
+
+
+// إجمالي التسبيحات
+function updateTasbeehStats(){
+
+let total = 0;
+
+[
+"subhanCounter",
+"hamdCounter",
+"akbarCounter",
+"estCounter",
+"laCounter"
+
+].forEach(id=>{
+
+total += parseInt(localStorage.getItem(id) || 0);
+
+});
+
+document.getElementById("tasbeehTotal").innerHTML = total;
+
+}
+
+window.addEventListener("load", updateTasbeehStats);
+
+</script>
 </body>
 
 </html>
